@@ -1,0 +1,9 @@
+application: python-play
+version: datastore-handle
+
+runtime: go
+api_version: go1
+
+- url: /.*
+  script: _go_app
+  secure: always
