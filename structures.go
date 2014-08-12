@@ -1,33 +1,37 @@
-package structures
-
+package datastorehandler
 
 type KindInfo struct {
-	Name string
+	Name      string
 	Namespace string
 }
 
-type OpType struct {
-	_ = iota
+type OpType int
+
+const (
+	_ OpType = iota
 	UPDATE
 	DELETE
 	MODIFY_FIELD
 	// UPSERT, INSERT ?
+)
+
+type Relation int
+
+const (
+	_ Relation = iota
+	EQUALS
+	GREATER_THAN
+	GREATER_EQ
+	LESSER
+	LESSER_EQ
+)
+
+type Condition struct {
+	rel   Relation
+	param string
+	value interface{}
 }
 
 type Requisite struct {
-	condition struct {
-	relation struct {
-		_ = iota
-		EQUALS
-		GREATER_THAN
-		GREATER_EQ
-		LESSER
-		LESSER_EQ
-	}
-		rel relation
-		param string
-		value interface{}
-	}
-
-	conditions []condition
+	conditions []Condition
 }
